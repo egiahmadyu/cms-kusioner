@@ -10,6 +10,6 @@ class TypeKuesioner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'to_question'
+        'nama', 'to_question'
     ];
 }

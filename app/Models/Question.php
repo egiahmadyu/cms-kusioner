@@ -12,7 +12,9 @@ class Question extends Model
     protected $fillable = [
         'type_kuesioner_id',
         'question',
-        'next_question',
+        'before_question',
+        'is_start',
+        'is_end',
         'choice'
     ];
 }

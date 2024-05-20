@@ -15,17 +15,14 @@ class TypeQuestionSeeder extends Seeder
     {
         TypeKuesioner::create([
             'nama' => 'Rawat Inap',
-            'to_question' => 1
         ]);
 
         TypeKuesioner::create([
             'nama' => 'Rawat Jalan / Hemodialisa',
-            'to_question' => 1
         ]);
 
         TypeKuesioner::create([
             'nama' => 'IGD',
-            'to_question' => 3
         ]);
     }
 }

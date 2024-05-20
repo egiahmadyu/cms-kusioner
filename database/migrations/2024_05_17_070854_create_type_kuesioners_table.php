@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('type_kuesioners', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('to_question')->nullable();
             $table->timestamps();
         });
     }
