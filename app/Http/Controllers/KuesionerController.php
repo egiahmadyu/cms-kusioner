@@ -86,19 +86,20 @@ class KuesionerController extends Controller
     {
         $type_kuesioner_id = $this->extractIdFromPayload($request->payload->postbackText);
         $question = Question::where('type_kuesioner_id', $type_kuesioner_id)->where('is_start', 1)->first();
-        $options = $this->formatOptions(json_decode($question->choice), '');
+        $options = $this->subFormatOptions(json_decode($question->choice), $question->id);
         return $this->sendInteractiveMessage($request, $question->question, $options, '2');
     }
 
     private function handleSubsequentStates($request, $client)
     {
         $answer_state = explode("_", $request->payload->postbackText);
+        $question_before = Question::where('id', end($answer_state))->first();
+        $this->storeAnswer($client, $question_before, $answer_state[0]);
         $question = Question::where('before_question', end($answer_state))->first();
         if (!$question) {
             return $this->sendDefaultMessage($request);
         }
-        $this->storeAnswer($client, $question, $answer_state[0]);
-        $options = $this->formatOptions(json_decode($question->choice), '');
+        $options = $this->subFormatOptions(json_decode($question->choice), $question->id);
         return $this->sendInteractiveMessage($request, $question->question, $options, '2');
     }
 
@@ -107,6 +108,16 @@ class KuesionerController extends Controller
         return collect($data)->map(function ($item) use ($prefix) {
             return [
                 'id' => $prefix.$item->id,
+                'teks' => $item->nama ?? $item,
+            ];
+        })->toJson();
+    }
+
+    private function subFormatOptions($data, $prefix)
+    {
+        return collect($data)->map(function ($item) use ($prefix) {
+            return [
+                'id' => $item.'_'.$prefix,
                 'teks' => $item->nama ?? $item,
             ];
         })->toJson();

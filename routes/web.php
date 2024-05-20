@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExcelExportController;
 use App\Http\Controllers\KuesionerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
   Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
   Route::get('kuesioner', [KuesionerController::class, 'index'])->name('kuesioner');
+
+  Route::get('export', [ExcelExportController::class, 'export'])->name('export');
 
   Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user');

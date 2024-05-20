@@ -12,4 +12,8 @@ class TypeKuesioner extends Model
     protected $fillable = [
         'nama', 'to_question'
     ];
+
+    public function question() {
+        return $this->hasMany(Question::class);
+    }
 }
