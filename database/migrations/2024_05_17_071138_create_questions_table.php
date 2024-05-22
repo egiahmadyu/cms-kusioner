@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type_kuesioner_id')->constrained('type_kuesioners');
+            // $table->foreignId('type_kuesioner_id')->constrained('type_kuesioners');
             $table->string('question');
             $table->integer('is_end')->default(0);
             $table->integer('is_start')->default(0);

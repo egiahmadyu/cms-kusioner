@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExcelExportController;
 use App\Http\Controllers\KuesionerController;
@@ -18,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('webhook', [KuesionerController::class, 'start']);
+// Route::post('webhook', [KuesionerController::class, 'start']);
+Route::post('webhook', [ConversationController::class, 'index']);
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login/proses', [AuthController::class, 'login_process'])->name('auth.process');
 
@@ -27,6 +29,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
   Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
   Route::get('kuesioner', [KuesionerController::class, 'index'])->name('kuesioner');
+  Route::get('kuesioner/tambah', [KuesionerController::class, 'tambah'])->name('kuesioner.tambah');
+  Route::post('kuesioner/tambah/simpan', [KuesionerController::class, 'simpan'])->name('kuesioner.tambah.simpan');
 
   Route::get('export', [ExcelExportController::class, 'export'])->name('export');
 

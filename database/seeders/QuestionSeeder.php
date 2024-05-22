@@ -11,7 +11,89 @@ class QuestionSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+
+     public function run():void
+     {
+        Question::create([
+            
+            'question' => 'Pelayanan Dokter Spesialis / Dokter Umum ',
+            'before_question' => null,
+            'is_start' => 1,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Perawat / Bidan',
+            'before_question' => 1,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Farmasi',
+            'before_question' => 2,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Radiologi',
+            'before_question' => 3,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Laboratoriumm',
+            'before_question' => 4,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Gizi',
+            'before_question' => 5,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Rehab Medis / Fisioterapi',
+            'before_question' => 6,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Kasir / Asuransi',
+            'before_question' => 7,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Kebersihan Ruangan, Kerapihan dan Kelayakan Fasilitas',
+            'before_question' => 8,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Pelayanan Pendaftaran Administrasi',
+            'before_question' => 9,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+
+        Question::create([
+            
+            'question' => 'Kemanan dan Ketertiban Rumah Sakit',
+            'is_end' => 1,
+            'before_question' => 10,
+            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+        ]);
+     }
+    public function run_old(): void
     {
         Question::create([
             'type_kuesioner_id' => 1,

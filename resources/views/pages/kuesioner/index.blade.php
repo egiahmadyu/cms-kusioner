@@ -15,18 +15,20 @@
                       <thead>
                         <tr>
                             <th>#</th>
-                            <th>Type Kuesioner</th>
+                            <th>Pertanyaan</th>
+                            <th>Jawaban </th>
                             <th class="no-content">Action</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                        @foreach ($type_kuesioner as $item)
+                        @foreach ($question as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->question }}</td>
+                                <td>{{ $item->choice }}</td>
                                 <td>
-                                    <a href="/kuesioner/edit/{{ $item->id }}"><button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Tambah Kuesioner</button></a>
+                                    <a href="/kuesioner/edit/{{ $item->id }}"><button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Edit Kuesioner</button></a>
                                 </td>
                             </tr>
                         @endforeach

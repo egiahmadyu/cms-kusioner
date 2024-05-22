@@ -14,9 +14,31 @@ class KuesionerController extends Controller
 {
     public function index()
     {
-        $data['type_kuesioner'] = TypeKuesioner::all();
+        $data['question'] = Question::orderBy('before_question')->get();
         return view('pages.kuesioner.index', $data);
     }
+
+    public function tambah()
+    {
+        $data['question'] = Question::orderBy('before_question')->get();
+        return view('pages.kuesioner.tambah', $data);
+    }
+
+    public function simpan(Request $request)
+    {
+        $check_before = Question::where('before_question', $request->before_question)->first();
+        if ($check_before) {
+            return redirect()->back()->with('error', 'Pertanyaan sebelumnya sudah ada yang sama');
+        }
+        Question::create([
+            'question' => $request->question,
+            'choice' => json_encode($request->choice),
+            'before_question' => $request->before_question,
+            'is_start' =>0,
+        ]);
+        return $this->response_json(200, 'Berhasil menambahkan pertanyaan', []);
+    }
+
     public function start(Request $request)
     {
         $request = json_decode($request->getContent());

@@ -10,7 +10,7 @@
                   <h2>{{ $sangat_puas }}</h2>
                   <p>From last week</p>
                   <div class="progress">
-                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: {{ ($sangat_puas / $total_kuesioner) * 100 }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? ($sangat_puas / $total_kuesioner) * 100 : 0 }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                   <h2>{{ $puas }}</h2>
                   <p>Orders in waitlist</p>
                   <div class="progress">
-                    <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: {{ ($puas / $total_kuesioner) * 100 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? ($puas / $total_kuesioner) * 100 : 0 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                   <h2>{{ $tidak_puas }}</h2>
                   <p>For last 30 days</p>
                   <div class="progress">
-                    <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: {{ ($tidak_puas / $total_kuesioner) * 100 }}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? ($tidak_puas / $total_kuesioner) * 100 : 0 }}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                   <h2>{{ $total_kuesioner }}</h2>
                   <p>Orders in waitlist</p>
                   <div class="progress">
-                    <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? 100: 0 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
             </div>
         </div>
