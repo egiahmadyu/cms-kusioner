@@ -6,40 +6,49 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Tambah Kuesioner</h5>
-                    <form id="form_tambah" class="">
+                  <h5 class="card-title">Edit Kuesioner</h5>
+                    <form id="form_edit" class="">
+                        <input type="text" value="{{$kuesioner->id}}" id="id_kuesioner" hidden>
                         @csrf
                         <div class="row">
                             <div class="col-md-12 col-lg-12 mb-3">
                                 <label class="form-control-label">Pertanyaan: <span
                                         class="tx-danger">*</span></label> <input
                                     class="form-control" id="question" name="question"
-                                    required="" type="text">
+                                    required="" type="text" value="{{$kuesioner->question}}">
                             </div>
                             <div class="col-md-12 col-lg-12 mb-3">
                                 <label class="form-control-label">Pertanyaan Sebelumnya: <span class="tx-danger">*</span></label> 
                                 <select class="form-control" id="before_question" name="before_question">
                                     <option value="" selected>...</option>
                                     @foreach ($question as $item)
-                                        <option value="{{$item->id}}">{{$item->question}}</option>
+                                        <option value="{{$item->id}}" {{$item->id == $kuesioner->before_question ? 'selected' : ''}}>{{$item->question}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6 col-lg-7">
-                                <label class="form-control-label">Jawaban: <span class="tx-danger">*</span></label> 
-                               <div class="row">
-                                <div class="col-lg-8">
-                                    <input
-                                    class="form-control" id="choice" name="choice[]"
-                                     required="" type="text">
+                            @php $choices = json_decode($kuesioner->choice); @endphp
+                            @foreach ($choices as $key => $choice)
+                                <div class="row row-{{$key}} mb-3">
+                                    <div class="col-md-6 col-lg-7">
+                                        <label class="form-control-label">Jawaban: <span class="tx-danger">*</span></label> 
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <input
+                                                class="form-control" id="choice" name="choice[]"
+                                                 required="" type="text" value="{{$choice}}">
+                                            </div>
+                                            @if ($key != 0)
+                                                <div class="col-lg-2">
+                                                    <button type="button" class="btn btn-danger" id="hapus_choice" onclick="hapus_pilihan({{$key}})"">Hapus</button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                                {{-- <div class="col-lg-2">
-                                    <button type="button" class="btn btn-danger" id="hapus_choice" onclick="hapus_pilihan(${i})">Hapus</button>
-                                </div> --}}
-                               </div>
-                            </div>
+                            @endforeach
+                           
                         </div>
                         <div id="row_choice"></div>
                         <div class="row">
@@ -62,7 +71,7 @@
 @push('script')
     <script src="{{asset('js/master.js')}}"></script>
     <script>
-        var i = 1;
+        var i = {{ count($choices) }};
         function tambah_pilihan() {
             var html = ` <div class="row row-${i} mb-3">
                             <div class="col-md-6 col-lg-7">
@@ -90,5 +99,5 @@
         }
        
     </script>
-    <script src="{{asset('js/kuesioner/tambah.js')}}"></script>
+    <script src="{{asset('js/kuesioner/edit.js')}}"></script>
 @endpush

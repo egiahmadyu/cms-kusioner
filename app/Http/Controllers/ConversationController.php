@@ -8,6 +8,7 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ConversationController extends Controller
 {
@@ -28,7 +29,7 @@ class ConversationController extends Controller
     {
         $this->initializeState($request);
         $client = $this->getOrCreateClient($request);
-
+        Log::info(json_encode($request));
         switch (Cache::get('state_'.$request->source)) {
             case '0':
                 return $this->handleInitialState($request);

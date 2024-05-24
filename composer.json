@@ -16,6 +16,7 @@
         "laravelcollective/html": "^6.4",
         "phpoffice/phpspreadsheet": "^2.1",
         "phpoffice/phpword": "^1.2",
+        "rap2hpoutre/laravel-log-viewer": "^2.4",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^6.7",
         "yajra/laravel-datatables-oracle": "10.11"

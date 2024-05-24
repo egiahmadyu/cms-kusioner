@@ -9,6 +9,7 @@ use App\Models\TypeKuesioner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class KuesionerController extends Controller
 {
@@ -22,6 +23,24 @@ class KuesionerController extends Controller
     {
         $data['question'] = Question::orderBy('before_question')->get();
         return view('pages.kuesioner.tambah', $data);
+    }
+
+    public function edit($id)
+    {
+        $data['kuesioner'] = Question::find($id);
+        $data['question'] = Question::orderBy('before_question')->get();
+        return view('pages.kuesioner.edit', $data);
+    }
+
+    public function edit_simpan($id, Request $request)
+    {
+        $question = Question::find($id);
+        $question->update([
+            'question' => $request->question,
+            'choice' => json_encode($request->choice),
+            'before_question' => $request->before_question,
+        ]);
+        return $this->response_json(200, 'Berhasil Mengedit pertanyaan', []);
     }
 
     public function simpan(Request $request)
@@ -68,7 +87,7 @@ class KuesionerController extends Controller
     {
         $this->initializeState($request);
         $client = $this->getOrCreateClient($request);
-
+        Log::info($request);
         switch (Cache::get('state_'.$request->source)) {
             case '0':
                 return $this->handleInitialState($request);

@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('webhook', [ConversationController::class, 'index']);
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('login/proses', [AuthController::class, 'login_process'])->name('auth.process');
+//log-viewers
+Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
   Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -31,8 +33,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
   Route::get('kuesioner', [KuesionerController::class, 'index'])->name('kuesioner');
   Route::get('kuesioner/tambah', [KuesionerController::class, 'tambah'])->name('kuesioner.tambah');
   Route::post('kuesioner/tambah/simpan', [KuesionerController::class, 'simpan'])->name('kuesioner.tambah.simpan');
+  Route::get('kuesioner/edit/{id}', [KuesionerController::class, 'edit'])->name('kuesioner.edit');
+  Route::post('kuesioner/edit/{id}/simpan', [KuesionerController::class, 'edit_simpan'])->name('kuesioner.edit.simpan');
 
-  Route::get('export', [ExcelExportController::class, 'export'])->name('export');
+  Route::get('export', [ExcelExportController::class, 'export_survey'])->name('export');
 
   Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user');

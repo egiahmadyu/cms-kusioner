@@ -8,7 +8,7 @@
                 <div class="card-body">
                   <h5 class="card-title">List Kuesioner</h5>
                   <div class="d-flex flex-row-reverse mb-2 px-0">
-                    <a href="/kuesioner/create"><button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Tambah Kuesioner</button></a>
+                    <a href="/kuesioner/tambah"><button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Tambah Kuesioner</button></a>
                   </div>
                   <div class="table-responsive">
                     <table id="zero" class="display datatables-users" style="width:100%">

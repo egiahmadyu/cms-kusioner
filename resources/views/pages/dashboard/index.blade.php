@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title">Sangat Puas</h5>
                   <h2>{{ $sangat_puas }}</h2>
-                  <p>From last week</p>
+                  <p>Tahun {{ date('Y') }}</p>
                   <div class="progress">
                     <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? ($sangat_puas / $total_kuesioner) * 100 : 0 }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
@@ -20,7 +20,7 @@
             <div class="card-body">
                 <h5 class="card-title">Puas</h5>
                   <h2>{{ $puas }}</h2>
-                  <p>Orders in waitlist</p>
+                  <p>Tahun {{ date('Y') }}</p>
                   <div class="progress">
                     <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? ($puas / $total_kuesioner) * 100 : 0 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
@@ -32,7 +32,7 @@
             <div class="card-body">
                 <h5 class="card-title">Tidak Puas</h5>
                   <h2>{{ $tidak_puas }}</h2>
-                  <p>For last 30 days</p>
+                  <p>Tahun {{ date('Y') }}</p>
                   <div class="progress">
                     <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? ($tidak_puas / $total_kuesioner) * 100 : 0 }}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
@@ -44,7 +44,7 @@
             <div class="card-body">
                 <h5 class="card-title">Total</h5>
                   <h2>{{ $total_kuesioner }}</h2>
-                  <p>Orders in waitlist</p>
+                  <p>Tahun {{ date('Y') }}</p>
                   <div class="progress">
                     <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: {{ $total_kuesioner ? 100: 0 }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
@@ -64,20 +64,9 @@
       <div class="col-sm-6 col-xl-4">
         <div class="card stat-widget">
           <div class="card-body">
-              <h5 class="card-title">Social Media</h5>
-              <div class="transactions-list">
-                <div class="tr-item">
-                  <div class="tr-company-name">
-                    <div class="tr-icon tr-card-icon tr-card-bg-primary text-primary">
-                      <i data-feather="thumbs-up"></i>
-                    </div>
-                    <div class="tr-text">
-                      <h4>New post reached 7k+ likes</h4>
-                      <p>02 March</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <h5 class="card-title">5 Orang Terakhir yang Melakukan Survey</h5>
+             
+              @foreach ($last_customer as $customer)
               <div class="transactions-list">
                 <div class="tr-item">
                   <div class="tr-company-name">
@@ -85,51 +74,14 @@
                       <i data-feather="twitch"></i>
                     </div>
                     <div class="tr-text">
-                      <h4>Developer AMA is now live</h4>
-                      <p>01 March</p>
+                      <h4>{{ $customer->customer->nama }} ({{ $customer->customer->no_hp }})</h4>
+                      <p>{{ $customer->count }}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="transactions-list">
-                <div class="tr-item">
-                  <div class="tr-company-name">
-                    <div class="tr-icon tr-card-icon tr-card-bg-danger text-danger">
-                      <i data-feather="instagram"></i>
-                    </div>
-                    <div class="tr-text">
-                      <h4>52 unread messages</h4>
-                      <p>23 February</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="transactions-list">
-                <div class="tr-item">
-                  <div class="tr-company-name">
-                    <div class="tr-icon tr-card-icon tr-card-bg-warning text-warning">
-                      <i data-feather="shopping-bag"></i>
-                    </div>
-                    <div class="tr-text">
-                      <h4>2 new orders from shop page</h4>
-                      <p>17 February</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="transactions-list">
-                <div class="tr-item">
-                  <div class="tr-company-name">
-                    <div class="tr-icon tr-card-icon tr-card-bg-info text-info">
-                      <i data-feather="twitter"></i>
-                    </div>
-                    <div class="tr-text">
-                      <h4>Hashtag #circl is trending</h4>
-                      <p>03 February</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              @endforeach
+              
           </div>
       </div>
       </div>
@@ -392,5 +344,123 @@
 
 @push('script')
     {{-- <script src="{{ asset('assets/js/index.js') }}"></script> --}}
-    <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> --}}
+    <script>
+      $(document).ready(function () {
+        var sangat_puas = {!! json_encode($sangat_puas_chart) !!};
+        var puas = {!! json_encode($puas_chart) !!};
+        var tidak_puas = {!! json_encode($tidak_puas_chart) !!};
+        var month = {!! json_encode($months) !!};
+        console.log(Object.values(sangat_puas))
+          var options1 = {
+              chart: {
+                  height: 350,
+                  type: 'area',
+                  toolbar: {
+                      show: false,
+                  }
+              },
+              dataLabels: {
+                  enabled: false
+              },
+              stroke: {
+                  curve: 'smooth'
+              },
+              colors: ['#90e0db','#b3baff','#eb4982'],
+              series: [{
+                  name: 'Sangat Puas',
+                  data: Object.values(sangat_puas)
+              },
+              {
+                  name: 'Puas',
+                  data: Object.values(puas)
+              },
+              {
+                  name: 'Tidak Puas',
+                  data: Object.values(tidak_puas)
+              },
+            ],
+
+              xaxis: {
+                  categories: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+                  labels: {
+                      style: {
+                          colors: 'rgba(94, 96, 110, .5)'
+                      }
+                  }
+              },
+              grid: {
+                  borderColor: 'rgba(94, 96, 110, .5)',
+                  strokeDashArray: 4
+              }    
+          }
+
+          var chart1 = new ApexCharts(
+              document.querySelector("#apex1"),
+              options1
+          );
+
+          chart1.render();
+
+          var options2 = {
+              series: [{
+                  name: 'Series 1',
+                  data: [20, 100, 40, 30, 50, 80, 33]
+              }],
+              chart: {
+                  height: 337,
+                  type: 'radar',
+                  toolbar: {
+                      show: false,
+                  }
+              },
+              dataLabels: {
+                  enabled: true
+              },
+              plotOptions: {
+                  radar: {
+                      size: 140,
+                      polygons: {
+                          strokeColors: '#e9e9e9',
+                          fill: {
+                              colors: ['#f8f8f8', '#fff']
+                          }
+                      }
+                  }
+              },
+              colors: ['#EE6E83'],
+              markers: {
+                  size: 4,
+                  colors: ['#fff'],
+                  strokeColor: '#FF4560',
+                  strokeWidth: 2,
+              },
+              tooltip: {
+                  y: {
+                      formatter: function (val) {
+                          return val
+                      }
+                  }
+              },
+              xaxis: {
+                  categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+              },
+              yaxis: {
+                  tickAmount: 7,
+                  labels: {
+                      formatter: function (val, i) {
+                          if (i % 2 === 0) {
+                              return val
+                          } else {
+                              return ''
+                          }
+                      }
+                  }
+              }
+          };
+
+          var chart2 = new ApexCharts(document.querySelector("#apex2"), options2);
+          chart2.render();
+      });
+    </script>
 @endpush

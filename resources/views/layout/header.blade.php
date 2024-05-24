@@ -16,11 +16,11 @@
         </li>
       </ul>
       </div>
-      <div class="logo">
+      {{-- <div class="logo">
         <a class="nav-brand" href="{{ route('dashboard') }}">
           <img src="{{ asset('assets/images/FONT-EVIDENCE.png') }}" alt="logo" height="30">
         </a>
-      </div>
+      </div> --}}
       <div class="" id="headerNav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
@@ -108,7 +108,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link profile-dropdown" href="#" id="profileDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('assets/images/polri-cartoon.png') }}" alt="avatar" height="40"></a>
+            <a class="nav-link profile-dropdown" href="#" id="profileDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('assets/images/logo.png') }}" alt="avatar" height="40"></a>
             <div class="dropdown-menu dropdown-menu-end profile-drop-menu" aria-labelledby="profileDropDown">
               <span class="dropdown-item">{{ Auth::user()->name; }}</span>
               <a class="dropdown-item" href="#"><i data-feather="user"></i>Profile</a>
