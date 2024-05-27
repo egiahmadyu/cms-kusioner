@@ -33,35 +33,35 @@ class QuestionSeeder extends Seeder
             
             'question' => 'Pelayanan Farmasi',
             'before_question' => 2,
-            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+            'choice' => '["SANGAT PUAS","PUAS","TIDAK PUAS","TIDAK MENGGUNAKAN"]'
         ]);
 
         Question::create([
             
             'question' => 'Pelayanan Radiologi',
             'before_question' => 3,
-            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+            'choice' => '["SANGAT PUAS","PUAS","TIDAK PUAS","TIDAK MENGGUNAKAN"]'
         ]);
 
         Question::create([
             
             'question' => 'Pelayanan Laboratoriumm',
             'before_question' => 4,
-            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+            'choice' => '["SANGAT PUAS","PUAS","TIDAK PUAS","TIDAK MENGGUNAKAN"]'
         ]);
 
         Question::create([
             
             'question' => 'Pelayanan Gizi',
             'before_question' => 5,
-            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+            'choice' => '["SANGAT PUAS","PUAS","TIDAK PUAS","TIDAK MENGGUNAKAN"]'
         ]);
 
         Question::create([
             
             'question' => 'Pelayanan Rehab Medis / Fisioterapi',
             'before_question' => 6,
-            'choice' => '["SANGAT PUAS", "PUAS", "TIDAK PUAS"]'
+            'choice' => '["SANGAT PUAS","PUAS","TIDAK PUAS","TIDAK MENGGUNAKAN"]'
         ]);
 
         Question::create([
